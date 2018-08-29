@@ -19,17 +19,13 @@
             android:contentDescription="@string/sandwich_picture_content_description"
             android:scaleType="centerCrop" />
 
-        <TextView
-            android:id="@+id/origin_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/image_iv" />
+
 
         <TextView
             android:id="@+id/detail_also_known_as_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/origin_tv"
+            android:layout_below="@+id/image_iv"
             android:text="@string/detail_also_known_as_label"
             android:textStyle="bold" />
 
@@ -37,7 +33,7 @@
             android:id="@+id/also_known_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/origin_tv"
+            android:layout_below="@+id/image_iv"
             android:layout_toEndOf="@+id/detail_also_known_as_tv" />
 
         <TextView
@@ -62,6 +58,12 @@
             android:layout_below="@+id/detail_ingredients_tv"
             android:text="@string/detail_place_of_origin_label"
             android:textStyle="bold" />
+        <TextView
+            android:id="@+id/origin_tv"
+            android:layout_width="wrap_content"
+            android:layout_toEndOf="@+id/detail_place_of_origin_tv"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/detail_ingredients_tv" />
 
         <TextView
             android:id="@+id/detail_description_tv"
