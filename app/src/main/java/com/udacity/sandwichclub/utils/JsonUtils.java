@@ -17,7 +17,7 @@ import java.util.List;
 import static android.content.ContentValues.TAG;
 
 
-public class JsonUtils{
+public class JsonUtils {
     private final static String TAG = JsonUtils.class.getSimpleName();
 
     public static Sandwich parseSandwichJson(String json) {
@@ -47,7 +47,7 @@ public class JsonUtils{
             JSONArray ingredientsArray = sandwichObject.getJSONArray("ingredients");
             List<String> ingredients = getListFromJsonArray(ingredientsArray);
             sandwich.setIngredients(ingredients);
-            Log.d(TAG, "parseSandwichJson:"+sandwich);
+
             return sandwich;
 
         } catch (JSONException e) {
