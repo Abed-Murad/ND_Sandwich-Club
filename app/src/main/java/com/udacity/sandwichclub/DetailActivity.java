@@ -3,6 +3,7 @@ package com.udacity.sandwichclub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +27,6 @@ public class DetailActivity extends AppCompatActivity {
         TextView alsoknownTv = findViewById(R.id.also_known_tv);
         TextView ingredientsTv = findViewById(R.id.ingredients_tv);
         TextView descriptionTv = findViewById(R.id.description_tv);
-
 
         Intent intent = getIntent();
         if (intent == null) {
@@ -58,8 +58,29 @@ public class DetailActivity extends AppCompatActivity {
 
 
         originPlaceTv.setText(sandwich.getPlaceOfOrigin());
-        alsoknownTv.setText(sandwich.getAlsoKnownAs().toString());
-        ingredientsTv.setText(sandwich.getIngredients().toString());
+
+        if (alsoknownTv != null) {
+            for (int i = 0; i < sandwich.getAlsoKnownAs().size(); i++) {
+                String name = sandwich.getAlsoKnownAs().get(i);
+                if (i != sandwich.getAlsoKnownAs().size() - 1) {
+                    alsoknownTv.append(name + " , ");
+                } else {
+                    alsoknownTv.append(name + " . ");
+                }
+            }
+        }
+
+        if (alsoknownTv != null) {
+            for (int i = 0; i < sandwich.getIngredients().size(); i++) {
+                String ingredient = sandwich.getIngredients().get(i);
+                if (i != sandwich.getIngredients().size() - 1) {
+                    ingredientsTv.append(ingredient + " , ");
+                } else {
+                    ingredientsTv.append(ingredient + " . ");
+                }
+            }
+        }
+
         descriptionTv.setText(sandwich.getDescription());
 
     }

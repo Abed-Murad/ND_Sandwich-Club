@@ -32,6 +32,7 @@
 
         <TextView
             android:id="@+id/also_known_tv"
+            android:paddingStart="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -51,8 +52,11 @@
             android:layout_width="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+
             android:layout_below="@+id/also_known_tv"
             android:layout_toEndOf="@+id/detail_ingredients_tv" />
+
 
         <TextView
             android:id="@+id/detail_place_of_origin_tv"
@@ -64,6 +68,8 @@
         <TextView
             android:id="@+id/origin_tv"
             android:layout_width="wrap_content"
+            android:paddingStart="8dp"
+
             android:layout_toEndOf="@+id/detail_place_of_origin_tv"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -81,6 +87,8 @@
         <TextView
             android:id="@+id/description_tv"
             android:layout_width="wrap_content"
+            android:paddingStart="8dp"
+
             android:layout_height="wrap_content"
             android:layout_below="@+id/origin_tv"
             android:layout_toEndOf="@+id/detail_description_tv" />
