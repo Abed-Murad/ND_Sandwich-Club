@@ -1,4 +1,4 @@
-# Sandwich Club Project
+# Sandwich Club App
 
 ## Project Overview
 **Sandwich Club** shows the details of each sandwich once it is selected.
