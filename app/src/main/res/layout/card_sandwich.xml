@@ -4,29 +4,32 @@
     <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_marginTop=".5dp"
         android:id="@+id/cardView"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:background="@drawable/bg_sandwich_card"
         android:layout_height="240dp"
         card_view:cardCornerRadius="4dp">
 
         <ImageView
             android:contentDescription="@string/desc_background_image_view"
             android:layout_width="match_parent"
+            android:scaleType="centerCrop"
+            android:foreground="@drawable/bg_sandwich_card"
             android:id="@+id/backgroundImageVIew"
             android:layout_height="match_parent" />
+
         <TextView
             android:id="@+id/sandwichNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
-            tools:text="Sandwich Name"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="24dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             android:textColor="@android:color/white"
             card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintStart_toStartOf="parent" />
+            card_view:layout_constraintStart_toStartOf="parent"
+            tools:text="Sandwich Name" />
     </android.support.constraint.ConstraintLayout>
 
 </layout>
