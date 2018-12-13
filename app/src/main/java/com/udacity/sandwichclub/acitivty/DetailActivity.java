@@ -25,15 +25,7 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
-
-
-        ImageView ingredientsIv = findViewById(R.id.sandwichImageView);
-        TextView originPlaceTv = findViewById(R.id.originTextView);
-        TextView alsoknownTv = findViewById(R.id.aKaTextView);
-        TextView ingredientsTv = findViewById(R.id.ingredientsTextView);
-        TextView descriptionTv = findViewById(R.id.description_tv);
 
         Intent intent = getIntent();
         if (intent == null) {
@@ -56,23 +48,18 @@ public class DetailActivity extends AppCompatActivity {
             return;
         }
 
-        populateUI();
-        Glide.with(this)
-                .load(sandwich.getImage())
-                .into(ingredientsIv);
-
+        populateUI(sandwich);
         setTitle(sandwich.getMainName());
+    }
 
 
-        originPlaceTv.setText(sandwich.getPlaceOfOrigin());
 
-
-        alsoknownTv.setText(sandwich.getAlsoKnownAs() != null ? "⚬ A.K.A : " + sandwich.getAlsoKnownAs() : "");
-        originPlaceTv.setText(sandwich.getPlaceOfOrigin() != null ? "⚬ Originally from  " + sandwich.getPlaceOfOrigin() : "");
-        ingredientsTv.setText(sandwich.getAlsoKnownAs() != null ? sandwich.getIngredients() : "");
-
-        descriptionTv.setText(sandwich.getDescription());
-
+    private void populateUI(Sandwich sandwich) {
+        Glide.with(this).load(sandwich.getImage()).into(mBinding.sandwichImageView);
+        mBinding.aKaTextView.setText(sandwich.getAlsoKnownAs() != null ? "⚬ A.K.A : " + sandwich.getAlsoKnownAs() : "");
+        mBinding.originTextView.setText(sandwich.getPlaceOfOrigin() != null ? "⚬ Originally from  " + sandwich.getPlaceOfOrigin() : "");
+        mBinding.ingredientsTextView.setText(sandwich.getAlsoKnownAs() != null ? sandwich.getIngredients() : "");
+        mBinding.descriptionTextView.setText(sandwich.getDescription());
     }
 
     private void closeOnError() {
@@ -80,7 +67,4 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
 
-    private void populateUI() {
-
-    }
 }
