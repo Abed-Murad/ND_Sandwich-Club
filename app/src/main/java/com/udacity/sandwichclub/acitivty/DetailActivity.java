@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,13 +54,32 @@ public class DetailActivity extends AppCompatActivity {
     }
 
 
-
     private void populateUI(Sandwich sandwich) {
+
         Glide.with(this).load(sandwich.getImage()).into(mBinding.sandwichImageView);
-        mBinding.aKaTextView.setText(sandwich.getAlsoKnownAs() != null ? "⚬ A.K.A : " + sandwich.getAlsoKnownAs() : "");
-        mBinding.originTextView.setText(sandwich.getPlaceOfOrigin() != null ? "⚬ Originally from  " + sandwich.getPlaceOfOrigin() : "");
-        mBinding.ingredientsTextView.setText(sandwich.getAlsoKnownAs() != null ? sandwich.getIngredients() : "");
+
+        if (sandwich.getAlsoKnownAs() != null) {
+            mBinding.aKaTextView.setText("⚬ a.k.a : " + sandwich.getAlsoKnownAs());
+        } else {
+            mBinding.aKaTextView.setVisibility(View.GONE);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(0, 0, 0, 0);
+            mBinding.originTextView.setLayoutParams(params);
+        }
+
+        if (!sandwich.getPlaceOfOrigin().equals("")) {
+            mBinding.originTextView.setText(sandwich.getPlaceOfOrigin());
+        } else {
+            if (sandwich.getAlsoKnownAs()!= null) {
+                mBinding.originTextView.setVisibility(View.GONE);
+            } else {
+                mBinding.infoCard.setVisibility(View.INVISIBLE);
+            }
+        }
         mBinding.descriptionTextView.setText(sandwich.getDescription());
+        mBinding.ingredientsTextView.setText(sandwich.getIngredients());
+
+
     }
 
     private void closeOnError() {

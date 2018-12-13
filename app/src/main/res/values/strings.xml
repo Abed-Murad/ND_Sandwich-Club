@@ -13,8 +13,9 @@
     <!-- Error messages-->
     <string name="detail_error_message">Sandwich data not available</string>
     <string name="desc_background_image_view">Sandwich Image</string>
-    <string name="dot">●</string>
+    <string name="dot">⚬</string>
     <string name="title_description">Description</string>
+    <string name="title_ingredients">Ingredients</string>
 
     <string-array name="sandwich_names">
         <item>Meat and cheese sandwich</item>
