@@ -1,7 +1,6 @@
 package com.udacity.sandwichclub.utils;
 
-import android.util.Log;
-
+import com.orhanobut.logger.Logger;
 import com.udacity.sandwichclub.model.Sandwich;
 
 import org.json.JSONArray;
@@ -9,23 +8,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-
-import static android.content.ContentValues.TAG;
 
 
 public class JsonUtils {
-    private final static String TAG = JsonUtils.class.getSimpleName();
-    private final static String KEY_NAME = "name";
-    private final static String KEY_MAIN_NAME = "mainName";
-    private final static String KEY_PLACE_OF_ORIGIN = "placeOfOrigin";
-    private final static String KEY_DESCRIPTION = "description";
-    private final static String KEY_IMAGE = "image";
-    private final static String KEY_ALSO_KONWN_AS = "alsoKnownAs";
-    private final static String KEY_INGREDIENTS = "ingredients";
+
+    public final static String KEY_NAME = "name";
+    public final static String KEY_MAIN_NAME = "mainName";
+    public final static String KEY_PLACE_OF_ORIGIN = "placeOfOrigin";
+    public final static String KEY_DESCRIPTION = "description";
+    public final static String KEY_IMAGE = "image";
+    public final static String KEY_ALSO_KNOWN_AS = "alsoKnownAs";
+    public final static String KEY_INGREDIENTS = "ingredients";
 
     /**
      * This method is an Example of manual Json Parsing, The best practice is to use
@@ -54,7 +48,7 @@ public class JsonUtils {
             String image = sandwichObject.getString(KEY_IMAGE);
             sandwich.setImage(image);
 
-            JSONArray alsoKnownNamesArray = name.getJSONArray(KEY_ALSO_KONWN_AS);
+            JSONArray alsoKnownNamesArray = name.getJSONArray(KEY_ALSO_KNOWN_AS);
             List<String> alsoKnownNames = getListFromJsonArray(alsoKnownNamesArray);
             sandwich.setAlsoKnownAs(alsoKnownNames);
 
@@ -65,22 +59,28 @@ public class JsonUtils {
             return sandwich;
 
         } catch (JSONException e) {
-            Log.e(TAG, "parseSandwichJson: ", e);
+            Logger.e("Failed to Parse Sandwich Json", e);
         }
         return null;
     }
 
-    private static List<String> getListFromJsonArray(JSONArray alsoKnownNames) {
+    private static List<String> getListFromJsonArray(JSONArray jsonArray) {
         ArrayList<String> list = new ArrayList<>();
-        if (alsoKnownNames != null) {
-            int len = alsoKnownNames.length();
-            for (int i = 0; i < len; i++) {
+
+        if (jsonArray != null) {
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+
                 try {
-                    list.add(alsoKnownNames.get(i).toString());
+                    list.add(jsonArray.get(i).toString());
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    Logger.e("Failed to Extract The Objects List From JsonArray", e);
                 }
+
             }
+
+        } else {
+            Logger.e("JsonArray is null");
         }
         return list;
     }
