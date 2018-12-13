@@ -19,10 +19,18 @@ import static android.content.ContentValues.TAG;
 
 public class JsonUtils {
     private final static String TAG = JsonUtils.class.getSimpleName();
+    private final static String KEY_NAME = "name";
+    private final static String KEY_MAIN_NAME = "mainName";
+    private final static String KEY_PLACE_OF_ORIGIN = "placeOfOrigin";
+    private final static String KEY_DESCRIPTION = "description";
+    private final static String KEY_IMAGE = "image";
+    private final static String KEY_ALSO_KONWN_AS = "alsoKnownAs";
+    private final static String KEY_INGREDIENTS = "ingredients";
 
     /**
      * This method is an Example of manual Json Parsing, The best practice is to use
-     * a Parsing Library Like <a href="https://github.com/google/gson">Gson</a>
+     * a Parsing Library Like <a href="https://github.com/google/gson">Gson</a>.
+     *
      * @param json Json Data As A String
      * @return Json Data As A Sandwich Object
      */
@@ -33,24 +41,24 @@ public class JsonUtils {
 
             sandwichObject = new JSONObject(json);
 
-            JSONObject name = sandwichObject.getJSONObject("name");
-            String mainName = name.getString("mainName");
+            JSONObject name = sandwichObject.getJSONObject(KEY_NAME);
+            String mainName = name.getString(KEY_MAIN_NAME);
             sandwich.setMainName(mainName);
 
-            String placeOfOrigin = sandwichObject.getString("placeOfOrigin");
+            String placeOfOrigin = sandwichObject.getString(KEY_PLACE_OF_ORIGIN);
             sandwich.setPlaceOfOrigin(placeOfOrigin);
 
-            String description = sandwichObject.getString("description");
+            String description = sandwichObject.getString(KEY_DESCRIPTION);
             sandwich.setDescription(description);
 
-            String image = sandwichObject.getString("image");
+            String image = sandwichObject.getString(KEY_IMAGE);
             sandwich.setImage(image);
 
-            JSONArray alsoKnownNamesArray = name.getJSONArray("alsoKnownAs");
+            JSONArray alsoKnownNamesArray = name.getJSONArray(KEY_ALSO_KONWN_AS);
             List<String> alsoKnownNames = getListFromJsonArray(alsoKnownNamesArray);
             sandwich.setAlsoKnownAs(alsoKnownNames);
 
-            JSONArray ingredientsArray = sandwichObject.getJSONArray("ingredients");
+            JSONArray ingredientsArray = sandwichObject.getJSONArray(KEY_INGREDIENTS);
             List<String> ingredients = getListFromJsonArray(ingredientsArray);
             sandwich.setIngredients(ingredients);
 
