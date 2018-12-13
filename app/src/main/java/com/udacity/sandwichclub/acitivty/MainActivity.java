@@ -15,6 +15,7 @@ import android.widget.ListView;
 
 import com.udacity.sandwichclub.R;
 import com.udacity.sandwichclub.databinding.ActivityMainBinding;
+import com.udacity.sandwichclub.databinding.CardSandwichBinding;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding mBinding;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void launchDetailActivity(int position) {
+    public void launchDetailActivity(int position) {
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra(DetailActivity.EXTRA_POSITION, position);
         startActivity(intent);
@@ -63,10 +64,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         private class ViewHolder extends RecyclerView.ViewHolder {
+            CardSandwichBinding mBinding;
 
-            public ViewHolder(@NonNull View itemView) {
+            public ViewHolder(CardSandwichBinding binding) {
+                super(binding.getRoot());
+                this.mBinding = binding;
+                mBinding.getRoot().setOnClickListener(view -> launchDetailActivity(getAdapterPosition()));
 
-                super(itemView);
             }
         }
     }
