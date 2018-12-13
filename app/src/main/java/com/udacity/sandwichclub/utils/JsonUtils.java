@@ -20,8 +20,14 @@ import static android.content.ContentValues.TAG;
 public class JsonUtils {
     private final static String TAG = JsonUtils.class.getSimpleName();
 
+    /**
+     * This method is an Example of manual Json Parsing, The best practice is to use
+     * a Parsing Library Like <a href="https://github.com/google/gson">Gson</a>
+     * @param json Json Data As A String
+     * @return Json Data As A Sandwich Object
+     */
     public static Sandwich parseSandwichJson(String json) {
-        JSONObject sandwichObject = null;
+        JSONObject sandwichObject;
         Sandwich sandwich = new Sandwich();
         try {
 
