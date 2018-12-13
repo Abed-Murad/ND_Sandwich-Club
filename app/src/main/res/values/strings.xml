@@ -14,7 +14,7 @@
     <string name="detail_error_message">Sandwich data not available</string>
 
     <string-array name="sandwich_names">
-        <item>Ham and cheese sandwich</item>
+        <item>Meat and cheese sandwich</item>
         <item>Bosna</item>
         <item>Chivito</item>
         <item>Club sandwich</item>
