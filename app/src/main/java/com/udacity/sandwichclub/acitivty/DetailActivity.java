@@ -1,6 +1,7 @@
 package com.udacity.sandwichclub.acitivty;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.udacity.sandwichclub.databinding.ActivityDetailBinding;
 import com.udacity.sandwichclub.R;
 import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
@@ -18,15 +20,19 @@ public class DetailActivity extends AppCompatActivity {
     public static final String EXTRA_POSITION = "extra_position";
     private static final int DEFAULT_POSITION = -1;
 
+    private ActivityDetailBinding mBinding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
 
-        ImageView ingredientsIv = findViewById(R.id.image_iv);
-        TextView originPlaceTv = findViewById(R.id.origin_tv);
-        TextView alsoknownTv = findViewById(R.id.also_known_tv);
-        TextView ingredientsTv = findViewById(R.id.ingredients_tv);
+
+        ImageView ingredientsIv = findViewById(R.id.sandwichImageView);
+        TextView originPlaceTv = findViewById(R.id.originTextView);
+        TextView alsoknownTv = findViewById(R.id.aKaTextView);
+        TextView ingredientsTv = findViewById(R.id.ingredientsTextView);
         TextView descriptionTv = findViewById(R.id.description_tv);
 
         Intent intent = getIntent();
@@ -60,27 +66,10 @@ public class DetailActivity extends AppCompatActivity {
 
         originPlaceTv.setText(sandwich.getPlaceOfOrigin());
 
-        if (alsoknownTv != null) {
-            for (int i = 0; i < sandwich.getAlsoKnownAs().size(); i++) {
-                String name = sandwich.getAlsoKnownAs().get(i);
-                if (i != sandwich.getAlsoKnownAs().size() - 1) {
-                    alsoknownTv.append(name + " , ");
-                } else {
-                    alsoknownTv.append(name + " . ");
-                }
-            }
-        }
 
-        if (alsoknownTv != null) {
-            for (int i = 0; i < sandwich.getIngredients().size(); i++) {
-                String ingredient = sandwich.getIngredients().get(i);
-                if (i != sandwich.getIngredients().size() - 1) {
-                    ingredientsTv.append(ingredient + " , ");
-                } else {
-                    ingredientsTv.append(ingredient + " . ");
-                }
-            }
-        }
+        alsoknownTv.setText(sandwich.getAlsoKnownAs() != null ? "⚬ A.K.A : " + sandwich.getAlsoKnownAs() : "");
+        originPlaceTv.setText(sandwich.getPlaceOfOrigin() != null ? "⚬ Originally from  " + sandwich.getPlaceOfOrigin() : "");
+        ingredientsTv.setText(sandwich.getAlsoKnownAs() != null ? sandwich.getIngredients() : "");
 
         descriptionTv.setText(sandwich.getDescription());
 

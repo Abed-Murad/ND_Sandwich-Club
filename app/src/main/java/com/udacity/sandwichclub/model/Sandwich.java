@@ -27,8 +27,20 @@ public class Sandwich implements Parcelable {
         this.mainName = mainName;
     }
 
-    public List<String> getAlsoKnownAs() {
-        return alsoKnownAs;
+    public String getAlsoKnownAs() {
+        if (alsoKnownAs.size() != 0) {
+            StringBuilder text = new StringBuilder();
+            String prefix = "";
+            for (String serverId : alsoKnownAs) {
+                text.append(prefix);
+                prefix = ", ";
+                text.append(serverId);
+            }
+            return text.toString();
+
+        } else {
+            return null;
+        }
     }
 
     public void setAlsoKnownAs(List<String> alsoKnownAs) {
@@ -59,8 +71,21 @@ public class Sandwich implements Parcelable {
         this.image = image;
     }
 
-    public List<String> getIngredients() {
-        return ingredients;
+    public String getIngredients() {
+
+        if (ingredients.size() != 0) {
+            StringBuilder text = new StringBuilder();
+            String prefix = "⚬";
+            for (String serverId : ingredients) {
+                text.append(prefix);
+                prefix = "\n⚬";
+                text.append(serverId);
+            }
+            return text.toString();
+
+        } else {
+            return null;
+        }
     }
 
     public void setIngredients(List<String> ingredients) {
