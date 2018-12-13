@@ -1,36 +1,35 @@
 package com.udacity.sandwichclub.acitivty;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.udacity.sandwichclub.R;
+import com.udacity.sandwichclub.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
+    private ActivityMainBinding mBinding;
+    private RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        String[] sandwichesNames = getResources().getStringArray(R.array.sandwich_names);
+        mRecyclerView = mBinding.sandwichesRecyclerView;
 
-        String[] sandwiches = getResources().getStringArray(R.array.sandwich_names);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setAdapter(new SandwichesAdapter(sandwichesNames));
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, sandwiches);
-
-        // Simplification: Using a ListView instead of a RecyclerView
-        ListView listView = findViewById(R.id.sandwichesRecyclerView);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                launchDetailActivity(position);
-            }
-        });
     }
 
     private void launchDetailActivity(int position) {
@@ -38,4 +37,38 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(DetailActivity.EXTRA_POSITION, position);
         startActivity(intent);
     }
+
+    private class SandwichesAdapter extends RecyclerView.Adapter {
+
+        private String[] mSandwichesNames;
+
+        public SandwichesAdapter(String[] sandwichesNames) {
+            this.mSandwichesNames = sandwichesNames;
+        }
+
+        @NonNull
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, final int position) {
+            return null;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return mSandwichesNames.length;
+        }
+
+        private class ViewHolder extends RecyclerView.ViewHolder {
+
+            public ViewHolder(@NonNull View itemView) {
+
+                super(itemView);
+            }
+        }
+    }
+
 }
