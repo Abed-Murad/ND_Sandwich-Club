@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.udacity.sandwichclub.R;
 import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
@@ -51,7 +51,7 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         populateUI();
-        Picasso.with(this)
+        Glide.with(this)
                 .load(sandwich.getImage())
                 .into(ingredientsIv);
 

@@ -3,6 +3,10 @@ package com.udacity.sandwichclub.acitivty;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -15,9 +19,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.udacity.sandwichclub.R;
 import com.udacity.sandwichclub.databinding.ActivityMainBinding;
 import com.udacity.sandwichclub.databinding.CardSandwichBinding;
+import com.udacity.sandwichclub.utils.CONST;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding mBinding;
@@ -80,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
 
             private void bindData(String sandwichName) {
                 mBinding.sandwichNameTextView.setText(sandwichName);
+                Glide.with(MainActivity.this).load(CONST.getSandwichIamgeUrl(getAdapterPosition())).into(mBinding.backgroundImageVIew);
+
+
             }
         }
     }
