@@ -1,8 +1,11 @@
 package com.udacity.sandwichclub.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
-public class Sandwich {
+public class Sandwich implements Parcelable {
 
     private String mainName;
     private List<String> alsoKnownAs = null;
@@ -11,12 +14,10 @@ public class Sandwich {
     private String image;
     private List<String> ingredients = null;
 
-    /**
-     * No args constructor for use in serialization
-     */
-    public Sandwich() {
-    }
 
+    public Sandwich() {
+
+    }
     public Sandwich(String mainName, List<String> alsoKnownAs, String placeOfOrigin, String description, String image, List<String> ingredients) {
         this.mainName = mainName;
         this.alsoKnownAs = alsoKnownAs;
@@ -85,4 +86,40 @@ public class Sandwich {
                 ", ingredients=" + ingredients +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.mainName);
+        dest.writeStringList(this.alsoKnownAs);
+        dest.writeString(this.placeOfOrigin);
+        dest.writeString(this.description);
+        dest.writeString(this.image);
+        dest.writeStringList(this.ingredients);
+    }
+
+    protected Sandwich(Parcel in) {
+        this.mainName = in.readString();
+        this.alsoKnownAs = in.createStringArrayList();
+        this.placeOfOrigin = in.readString();
+        this.description = in.readString();
+        this.image = in.readString();
+        this.ingredients = in.createStringArrayList();
+    }
+
+    public static final Parcelable.Creator<Sandwich> CREATOR = new Parcelable.Creator<Sandwich>() {
+        @Override
+        public Sandwich createFromParcel(Parcel source) {
+            return new Sandwich(source);
+        }
+
+        @Override
+        public Sandwich[] newArray(int size) {
+            return new Sandwich[size];
+        }
+    };
 }
